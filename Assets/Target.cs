@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class Target : MonoBehaviour
 {
-
+    public bool isAlive = true;
     public UnityEvent interact;
 
 }

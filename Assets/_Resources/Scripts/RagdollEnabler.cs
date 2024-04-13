@@ -7,6 +7,7 @@ public class RagdollEnabler : MonoBehaviour {
     private Transform RagdollRoot;
     [SerializeField]
     private bool StartRagdoll = false;
+    [SerializeField] private GameObject pelvisToEnable;
     // Only public for Ragdoll Runtime GUI for explosive force
     public Rigidbody[] Rigidbodies;
     private CharacterJoint[] Joints;
@@ -26,6 +27,7 @@ public class RagdollEnabler : MonoBehaviour {
     }
 
     public void EnableRagdoll() {
+        pelvisToEnable.SetActive(true);
         Animator.enabled = false;
         foreach (CharacterJoint joint in Joints) {
             joint.enableCollision = true;

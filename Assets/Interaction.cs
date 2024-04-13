@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteAlways]
 public class Interaction : MonoBehaviour {
 
-    private GameObject _cam;
+    public GameObject _cam;
+    public Transform interactRoot;
+    public LayerMask layermask = 3;
     private Rigidbody holdingObj;
-    private Transform handRoot;
+    public Transform handRoot;
     [SerializeField] private float playerInteractDistance = 3f;
     private bool isActive = false;
 
@@ -17,8 +20,6 @@ public class Interaction : MonoBehaviour {
 
     private void Awake() {
         _cam = GameObject.FindGameObjectWithTag("MainCamera");
-        handRoot = transform.GetChild(2);
-        Physics.IgnoreLayerCollision(3, 3);
     }
 
     private void Update() {
@@ -44,15 +45,51 @@ public class Interaction : MonoBehaviour {
     }
     private void Interact() {
 
-        
         RaycastHit hit;
-        isActive = Physics.Raycast(_cam.transform.position, _cam.transform.TransformDirection(Vector3.forward), out hit, playerInteractDistance);
-        if (isActive && hit.transform.GetComponent<Rigidbody>() != null) {
-            holdingObj = hit.transform.GetComponent<Rigidbody>();
-            previousMass = holdingObj.mass;
-            previousDrag = holdingObj.drag;
-            holdingObj.mass = holdingMassModifier;
-            holdingObj.drag = holdingMassModifier;
+        if (Physics.Raycast(_cam.transform.position, _cam.transform.forward, out hit, playerInteractDistance, ~layermask)) {
+            // Check for Target script and invoke unity event. used to KILL rn
+            print(hit.collider.gameObject);
+            if (hit.transform.TryGetComponent<Target>(out Target target)) {
+
+                target.interact.Invoke();
+                return;
+            }
+
+            // Pick up body
+            if (hit.transform.GetComponent<Rigidbody>() != null) {
+                print("Hit smth");
+                holdingObj = hit.transform.GetComponent<Rigidbody>();
+                previousMass = holdingObj.mass;
+                previousDrag = holdingObj.drag;
+                holdingObj.mass = holdingMassModifier;
+                holdingObj.drag = holdingMassModifier;
+            }
         }
+        else print("didnt hit");
+        /*
+        Ray r = new Ray(interactRoot.position, interactRoot.forward);
+        if (Physics.Raycast(r, out RaycastHit hitInfo, playerInteractDistance)) {
+
+            // Check for Target script and invoke unity event. used to KILL rn
+            if (hitInfo.transform.TryGetComponent<Target>(out Target target)) {
+
+                target.interact.Invoke();
+                return;
+            }
+
+            // Pick up body
+            if (hitInfo.transform.GetComponent<Rigidbody>() != null) {
+                print("Hit smth");
+                holdingObj = hitInfo.transform.GetComponent<Rigidbody>();
+                previousMass = holdingObj.mass;
+                previousDrag = holdingObj.drag;
+                holdingObj.mass = holdingMassModifier;
+                holdingObj.drag = holdingMassModifier;
+            }
+            return;
+        }
+        else print("Also didnt hit");
+
+        */
     }
 }
