@@ -71,6 +71,7 @@ namespace StarterAssets
 		private CharacterController _controller;
 		private StarterAssetsInputs _input;
 		private GameObject _mainCamera;
+		private Interaction _interaction;
 
 		private const float _threshold = 0.01f;
 
@@ -99,6 +100,7 @@ namespace StarterAssets
 		{
 			_controller = GetComponent<CharacterController>();
 			_input = GetComponent<StarterAssetsInputs>();
+			_interaction = GetComponent<Interaction>();
 #if ENABLE_INPUT_SYSTEM
 			_playerInput = GetComponent<PlayerInput>();
 #else
@@ -115,6 +117,10 @@ namespace StarterAssets
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
+			if (_input.interact) {
+				_input.interact = false;
+				_interaction.StartInteraction();
+			}
 		}
 
 		private void LateUpdate()
