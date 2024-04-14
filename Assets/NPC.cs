@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Rendering.HighDefinition;
 
 public class NPC : MonoBehaviour
 {
@@ -65,7 +66,8 @@ public class NPC : MonoBehaviour
     public void DropLoot() {
         if (target.isAlive == false) {  
             for (int i = 0; i < drop.Length; i++) {
-                Instantiate(drop[i], transform.position, Quaternion.identity);
+                var newDrop = Instantiate(drop[i], transform.position, Quaternion.identity);
+                newDrop.name = drop[i].name;
             }
             gameObject.SetActive(false);
         }

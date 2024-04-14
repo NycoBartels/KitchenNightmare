@@ -25,7 +25,6 @@ public class RagdollEnabler : MonoBehaviour {
             EnableAnimator();
         }
     }
-
     public void EnableRagdoll() {
         pelvisToEnable.SetActive(true);
         Animator.enabled = false;

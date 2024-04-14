@@ -24,15 +24,6 @@ public class KnifeAnimation : MonoBehaviour
             isAttacking = true;
         }
 
-        /*
-        if (player.attacked) {
-            _anim.Play("Knife_Attack");
-            if (isAttacking == false) {
-                player.attacked = false;
-                isAttacking = true;
-                _anim.SetBool("attack", true);
-            }
-        }*/
         if (isAttacking) return;
 
         var speed = player._speed;
