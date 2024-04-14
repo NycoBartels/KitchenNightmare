@@ -8,6 +8,8 @@ public class Interaction : MonoBehaviour {
     public GameObject _cam;
     public Transform interactRoot;
     public LayerMask layermask = 3;
+    public float pushForce = 50;
+    public float hitForce = 2000;
     private Rigidbody holdingObj;
     public Transform handRoot;
     [SerializeField] private float playerInteractDistance = 3f;
@@ -42,6 +44,7 @@ public class Interaction : MonoBehaviour {
     private void DropObject() {
         holdingObj.mass = previousMass;
         holdingObj.drag = previousDrag;
+        holdingObj.AddForce(_cam.transform.forward * pushForce);
         holdingObj = null;
     }
     private void Interact() {
@@ -78,6 +81,10 @@ public class Interaction : MonoBehaviour {
                 } else {
                     target.getGutted.Invoke();
                     Instantiate(deathVFX, hit.point, Quaternion.identity);
+                }
+            } else {
+                if (hit.collider.gameObject.CompareTag("food")) {
+                    hit.rigidbody.AddForce(_cam.transform.forward * hitForce);
                 }
             }
         }

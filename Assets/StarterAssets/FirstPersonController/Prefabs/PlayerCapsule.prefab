@@ -366,8 +366,8 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 2
-  m_Radius: 0.5
+  m_Height: 1.5
+  m_Radius: 0.3
   m_SlopeLimit: 45
   m_StepOffset: 0.25
   m_SkinWidth: 0.02
@@ -402,6 +402,7 @@ MonoBehaviour:
   CinemachineCameraTarget: {fileID: 4135013735270702863}
   TopClamp: 89
   BottomClamp: -89
+  _speed: 0
 --- !u!114 &1978471637655604388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -555,7 +556,9 @@ MonoBehaviour:
   interactRoot: {fileID: 8590908017895152728}
   layermask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 12
+  pushForce: 500
+  hitForce: 7000
   handRoot: {fileID: 6891931641821108256}
   playerInteractDistance: 4
   deathVFX: {fileID: 5665871930419262348, guid: d962c936607930c43831ab60079421ac,

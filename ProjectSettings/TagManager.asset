@@ -9,6 +9,7 @@ TagManager:
   - food
   - Ignore
   - IgnoreTarget
+  - order
   layers:
   - Default
   - TransparentFX

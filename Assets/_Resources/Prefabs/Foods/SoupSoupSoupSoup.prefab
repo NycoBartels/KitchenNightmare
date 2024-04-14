@@ -168,6 +168,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoupSoupSoupSoup
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4df6ebc59871a0745a18768ae8a86c86,
+        type: 3}
+      propertyPath: m_TagString
+      value: food
+      objectReference: {fileID: 0}
     - target: {fileID: 1814889511461659819, guid: 4df6ebc59871a0745a18768ae8a86c86,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

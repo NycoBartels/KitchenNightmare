@@ -39,13 +39,15 @@ public class crafting : MonoBehaviour
             {
                 Debug.Log(o.name);
             }
-            Triggered(); //RING THE ALLARM!
+            if (documentation.Count > 1) {
+                Triggered(); //RING THE ALLARM!
+            }
         }
     }
 
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.name == "food")
+        if (other.gameObject.tag == "food")
         {
             documentation.Remove(other.gameObject); 
         }
@@ -74,69 +76,71 @@ public class crafting : MonoBehaviour
 
         switch (input)
         {
-            case "soupsoupsoupsoup":
+            // ALL THE SOUP SOUPS
+            case "soupsoupsoupsoupsoupsoupsoupsoup":
                 Spawny = soupsoupsoupsoup;
-                SpawnAndDelete();
+                SpawnAndDelete(input);
                 break;
-            case "soupsoupsoup":
+            case "soupsoupsoupsoup":
                 Spawny = soupsoupsoup;
-                SpawnAndDelete();
+                SpawnAndDelete(input);
 
                 break;
             case "soupsoup":
                 Spawny = soupsoup;
-                SpawnAndDelete();
+                SpawnAndDelete(input);
                 break;
 
 
-
+            // TWO HEARTS AND LIVER
             case "heartheartliver":
                 Spawny = twoheartsandaliver;
-                SpawnAndDelete();
+                SpawnAndDelete("twoheartsandaliver");
                 break;
             case "heartliverheart":
                 Spawny = twoheartsandaliver;
-                SpawnAndDelete();
+                SpawnAndDelete("twoheartsandaliver");
                 break;
             case "liverheartheart":
                 Spawny = twoheartsandaliver;
-                SpawnAndDelete();
+                SpawnAndDelete("twoheartsandaliver");
                 break;
 
 
-
+            // MEAT ASSORTMENT
             case "ribsdrumstickbone":
                 Spawny = meatsassortment;
-                SpawnAndDelete();
+                SpawnAndDelete("meatsassortment");
                 break;
             case "drumstickribsbone":
                 Spawny = meatsassortment;
-                SpawnAndDelete();
+                SpawnAndDelete("meatsassortment");
                 break;
             case "bonedrumstickribs":
                 Spawny = meatsassortment;
-                SpawnAndDelete();
+                SpawnAndDelete("meatsassortment");
                 break;
             case "drumstickboneribs":
                 Spawny = meatsassortment;
-                SpawnAndDelete();
+                SpawnAndDelete("meatsassortment");
                 break;
             case "boneribsdrumstick":
                 Spawny = meatsassortment;
-                SpawnAndDelete();
+                SpawnAndDelete("meatsassortment");
                 break;
             case "ribsbonedrumstick":
                 Spawny = meatsassortment;
-                SpawnAndDelete();
+                SpawnAndDelete("meatsassortment");
                 break;
 
+            // DRUM STICK SOUP
             case "drumsticksoup":
                 Spawny = drumsticksoup;
-                SpawnAndDelete();
+                SpawnAndDelete("drumsticksoup");
                 break;
             case "soupdrumstick":
                 Spawny = drumsticksoup;
-                SpawnAndDelete();
+                SpawnAndDelete("drumsticksoup");
                 break;
 
 
@@ -146,11 +150,14 @@ public class crafting : MonoBehaviour
         }
     }
 
-    private void SpawnAndDelete()
+    private void SpawnAndDelete(string input)
     {
         //spawn item
         var newSpawn = Instantiate(Spawny, spawnpoint.position, Quaternion.identity);
+        newSpawn.gameObject.name = input;
+        newSpawn.gameObject.tag = "food";
         print(newSpawn + "Spawned!");
+        spawnstring = "";
         //destroy the other items
         for (int i = 0; i < documentation.Count; i++)
         {

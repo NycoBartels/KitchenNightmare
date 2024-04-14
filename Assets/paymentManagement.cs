@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class paymentManagement : MonoBehaviour
 {
@@ -12,11 +13,10 @@ public class paymentManagement : MonoBehaviour
     [SerializeField] private GameObject goldenpipe;
     [SerializeField] private GameObject reward;
 
-
     void OnTriggerEnter(Collider other)
     {
         //check dish &or order
-        if (other.gameObject.tag == "dish")
+        if (other.gameObject.tag == "food")
         {
             dish = other.gameObject;
         }
@@ -24,9 +24,10 @@ public class paymentManagement : MonoBehaviour
         {
             order = other.gameObject;
         }
-        else
-        {
-            //EERRRROOOOORRRR
+        
+
+        if (order != null && dish != null) {
+            ordercheck();
         }
 
     }
@@ -34,30 +35,45 @@ public class paymentManagement : MonoBehaviour
     void OnTriggerExit(Collider other)
     {
         //check if dish or order is removed
+        if (other.CompareTag("food")) {
+            if (dish.gameObject == other.gameObject) {
+                dish = null;
+            }
+        }
+        if (other.CompareTag("order")) {
+            if (order.gameObject == other.gameObject) {
+                order = null;
+            }
+        }
     }
 
     private void ordercheck()
     {
         //if we have both a dish and an order, check if they are the right ones
-        if (dish.name == order.name)
+        if (dish.name == order.name && dish != null)
         {
+            Destroy(dish.gameObject);
+            Destroy(order.gameObject);
+            dish = null;
+            order = null;
+            //goldenpipe go, spout money.
 
-            //if they are the right ones, remove them and send a spawner command with the right money
-            if (true)
-            {
-                //goldenpipe go, spout money.
-                for (var i = 0; i < 50; i++)
-                {
-                    InvokeRepeating("Spawn", 0, i/5);
+            StartCoroutine(SpawnMoney());
 
-                }
-                
-            }
+
             //if they arent the right ones, error feedback!
             //EERRROORRR
             return;
+        } else {
+            print("WRONG ");
         }
+    }
 
+    private IEnumerator SpawnMoney() {
+        for (var i = 0;i < 50;i++) {
+            Spawn();
+            yield return new WaitForSeconds(.05f);
+        }
     }
 
     private void Spawn()
