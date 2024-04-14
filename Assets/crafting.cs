@@ -10,7 +10,7 @@ public class crafting : MonoBehaviour
     private string datacollection;
     private GameObject Spawny;
     [SerializeField]private Transform spawnpoint;
-    private List<GameObject> documentation;
+    private List<GameObject> documentation = new List<GameObject>();
 
     public string spawnstring;
 
@@ -30,7 +30,6 @@ public class crafting : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("collison");
         if (other.gameObject.tag == "food")
         {
             Debug.Log("Triggered by: " + other.name);
@@ -143,15 +142,15 @@ public class crafting : MonoBehaviour
 
 
 
-            default: Debug.Log("Incorrect combo: " + datacollection); break;
+            default: Debug.Log("Incorrect combo: " + spawnstring); break;
         }
     }
 
     private void SpawnAndDelete()
     {
         //spawn item
-        Instantiate(Spawny, spawnpoint);
-
+        var newSpawn = Instantiate(Spawny, spawnpoint.position, Quaternion.identity);
+        print(newSpawn + "Spawned!");
         //destroy the other items
         for (int i = 0; i < documentation.Count; i++)
         {

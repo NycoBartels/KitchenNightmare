@@ -5,17 +5,19 @@ using UnityEngine;
 
 public class AssemblyScript : MonoBehaviour
 {
+    [SerializeField] private Transform spawnpoint;
+
     [SerializeField] private List<GameObject> orders;
     private int random;
-    [SerializeField] Animator animator;
     private GameObject itsme;
-    [SerializeField] private GameObject spawnpoint;
+    Animator animator;
+
 
 
     private void Start()
     {
         //Heeeheheheheee
-        InvokeRepeating("Spawn", 0, 1f);
+        InvokeRepeating("Spawn", 0, 15f);
     }
     private void Spawn()
     {
@@ -24,7 +26,8 @@ public class AssemblyScript : MonoBehaviour
         itsme = orders[random];
         //spawn item
         Debug.Log("sup");
-        Instantiate(itsme, spawnpoint.transform);
+        Instantiate(itsme, spawnpoint.position, Quaternion.identity);
 
     }
 }
+
