@@ -12,7 +12,11 @@ public class AssemblyScript : MonoBehaviour
     [SerializeField] private GameObject spawnpoint;
 
 
-
+    private void Start()
+    {
+        //Heeeheheheheee
+        InvokeRepeating("Spawn", 0, 1f);
+    }
     private void Spawn()
     {
         //generate a random number for spawny
