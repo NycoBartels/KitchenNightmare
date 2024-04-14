@@ -1,19 +1,26 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class AssemblyScript : MonoBehaviour
 {
+    [SerializeField] private List<GameObject> orders;
+    private int random;
     [SerializeField] Animator animator;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private GameObject itsme;
+    [SerializeField] private GameObject spawnpoint;
 
-    // Update is called once per frame
-    void Update()
+
+
+    private void Spawn()
     {
-        
+        //generate a random number for spawny
+        random = UnityEngine.Random.Range(0, orders.Count);
+        itsme = orders[random];
+        //spawn item
+
+        Instantiate(itsme, spawnpoint.transform);
+
     }
 }
