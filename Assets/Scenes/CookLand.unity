@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.43921036, g: 0.603929, b: 0.88744366, a: 1}
+  m_IndirectSpecularColor: {r: 0.43921298, g: 0.60393304, b: 0.8874494, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8253,7 +8253,7 @@ MonoBehaviour:
     type: 3}
   soupsoupsoupsoup: {fileID: 5967504612361430993, guid: bc917bc033ab6c84d853a3af24c4dd51,
     type: 3}
-  drumsticksoup: {fileID: 7178688417092374552, guid: fabf3e77a48af7e4786102146e68a7b5,
+  drumsticksoup: {fileID: 3363407661525805045, guid: 8a429090a4e1177419e1e84dd801013a,
     type: 3}
   twoheartsandaliver: {fileID: 5443305960916780355, guid: 33c81c2d43450d744a6b30ed572f9276,
     type: 3}
