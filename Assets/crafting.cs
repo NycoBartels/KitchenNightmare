@@ -1,22 +1,73 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.UI.Image;
 
 public class crafting : MonoBehaviour
 {
-    public GameObject[] checkbox;
+    public GameObject checkbox;
     private string datacollection;
+    private GameObject Spawny;
+    [SerializeField]private Transform spawnpoint;
+    private List<GameObject> documentation;
+
+    public string spawnstring;
+
+    [SerializeField] private GameObject soupsoup;
+    [SerializeField] private GameObject soupsoupsoup;
+    [SerializeField] private GameObject soupsoupsoupsoup;
+    [SerializeField] private GameObject drumsticksoup;
+    [SerializeField] private GameObject twoheartsandaliver;
+    [SerializeField] private GameObject meatsassortment;
 
 
-
-
-
-    public void Triggered()
+    private void Start()
     {
-        //whipe previous string
-        //add data from each box on which string is inside.
-        //trigger spawner
+        //check every second.
+        //InvokeRepeating("Triggered", 0, 1f);
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("collison");
+        if (other.gameObject.tag == "food")
+        {
+            Debug.Log("Triggered by: " + other.name);
+            documentation.Add(other.gameObject);
+            Debug.Log("Documentation now reads: ");
+            foreach (GameObject o in documentation)
+            {
+                Debug.Log(o.name);
+            }
+            Triggered(); //RING THE ALLARM!
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.name == "food")
+        {
+            documentation.Remove(other.gameObject); 
+        }
+    }
+
+    private void Triggered()
+    {
+        //whipe string
+        spawnstring = "";
+
+        //fill in right string
+        for (int i = 0; i < documentation.Count; i++)
+        {
+            spawnstring += documentation[i].gameObject.name;
+        }
+        //trigger spawner
+        Spawner(spawnstring);
+    }
+
+
+
 
     private void Spawner(string input)
     {
@@ -25,51 +76,88 @@ public class crafting : MonoBehaviour
         switch (input)
         {
             case "soupsoupsoupsoup":
-                // spawn soupsoupsoupsoup
+                Spawny = soupsoupsoupsoup;
+                SpawnAndDelete();
                 break;
             case "soupsoupsoup":
-                // spawn soupsoupsoup
+                Spawny = soupsoupsoup;
+                SpawnAndDelete();
+
                 break;
             case "soupsoup":
-                // spawn soupsoup
+                Spawny = soupsoup;
+                SpawnAndDelete();
                 break;
 
 
 
             case "heartheartliver":
-                // spawn twoheartsandaliver
+                Spawny = twoheartsandaliver;
+                SpawnAndDelete();
                 break;
             case "heartliverheart":
-                // spawn twoheartsandaliver
+                Spawny = twoheartsandaliver;
+                SpawnAndDelete();
                 break;
             case "liverheartheart":
-                // spawn twoheartsandaliver
+                Spawny = twoheartsandaliver;
+                SpawnAndDelete();
                 break;
 
 
 
             case "ribsdrumstickbone":
-                // spawn twoheartsandaliver
+                Spawny = meatsassortment;
+                SpawnAndDelete();
                 break;
             case "drumstickribsbone":
-                // spawn twoheartsandaliver
+                Spawny = meatsassortment;
+                SpawnAndDelete();
                 break;
             case "bonedrumstickribs":
-                // spawn twoheartsandaliver
+                Spawny = meatsassortment;
+                SpawnAndDelete();
                 break;
             case "drumstickboneribs":
-                // spawn twoheartsandaliver
+                Spawny = meatsassortment;
+                SpawnAndDelete();
                 break;
             case "boneribsdrumstick":
-                // spawn twoheartsandaliver
+                Spawny = meatsassortment;
+                SpawnAndDelete();
                 break;
             case "ribsbonedrumstick":
-                // spawn twoheartsandaliver
+                Spawny = meatsassortment;
+                SpawnAndDelete();
+                break;
+
+            case "drumsticksoup":
+                Spawny = drumsticksoup;
+                SpawnAndDelete();
+                break;
+            case "soupdrumstick":
+                Spawny = drumsticksoup;
+                SpawnAndDelete();
                 break;
 
 
 
-            default: break;
+
+            default: Debug.Log("Incorrect combo: " + datacollection); break;
         }
+    }
+
+    private void SpawnAndDelete()
+    {
+        //spawn item
+        Instantiate(Spawny, spawnpoint);
+
+        //destroy the other items
+        for (int i = 0; i < documentation.Count; i++)
+        {
+            Destroy(documentation[i].gameObject);
+        }
+        documentation.Clear();
+
     }
 }
