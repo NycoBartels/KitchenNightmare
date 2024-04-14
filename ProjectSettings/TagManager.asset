@@ -7,6 +7,8 @@ TagManager:
   - CinemachineTarget
   - Body
   - food
+  - Ignore
+  - IgnoreTarget
   layers:
   - Default
   - TransparentFX
