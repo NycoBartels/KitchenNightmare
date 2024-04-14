@@ -56,7 +56,7 @@ public class Interaction : MonoBehaviour {
             }
 
             // Pick up body
-            if (hit.transform.GetComponent<Rigidbody>() != null) {
+            if (hit.transform.GetComponent<Rigidbody>() != null && hit.collider.gameObject.isStatic == false) {
                 print("Hit smth");
                 holdingObj = hit.transform.GetComponent<Rigidbody>();
                 previousMass = holdingObj.mass;

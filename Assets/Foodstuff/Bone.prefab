@@ -26,7 +26,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 19a3f6dff0568a34fabc32c65da7080e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -101.928
+      value: -123.37
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 19a3f6dff0568a34fabc32c65da7080e,
         type: 3}
@@ -36,7 +36,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 19a3f6dff0568a34fabc32c65da7080e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.622
+      value: -6.75
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 19a3f6dff0568a34fabc32c65da7080e,
         type: 3}
@@ -96,6 +96,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 5589513690056460635}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 19a3f6dff0568a34fabc32c65da7080e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2348426605236447789}
   m_SourcePrefab: {fileID: 100100000, guid: 19a3f6dff0568a34fabc32c65da7080e, type: 3}
 --- !u!1 &510857569987806139 stripped
 GameObject:
@@ -122,5 +126,32 @@ BoxCollider:
   m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.3, y: 0.3, z: 0.3}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.1327177, y: 1.9845219, z: 0.13018474}
+  m_Center: {x: -0.0065669846, y: 0.016272664, z: -0.011841372}
+--- !u!54 &2348426605236447789
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 510857569987806139}
+  serializedVersion: 4
+  m_Mass: 2
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
