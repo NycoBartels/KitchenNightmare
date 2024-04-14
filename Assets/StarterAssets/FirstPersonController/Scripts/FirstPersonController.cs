@@ -121,6 +121,10 @@ namespace StarterAssets
 				_input.interact = false;
 				_interaction.StartInteraction();
 			}
+			if (_input.shank) {
+				_input.shank = false;
+				_interaction.Shank();
+			}
 		}
 
 		private void LateUpdate()

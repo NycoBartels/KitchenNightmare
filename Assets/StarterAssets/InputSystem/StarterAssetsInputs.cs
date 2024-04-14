@@ -13,6 +13,7 @@ namespace StarterAssets
 		public bool jump;
 		public bool sprint;
 		public bool interact;
+		public bool shank;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -47,6 +48,9 @@ namespace StarterAssets
 		public void OnInteract(InputValue value) {
 			InteractInput(value.isPressed);
 		}
+		public void OnShank(InputValue value) {
+			ShankInput(value.isPressed);
+		}
 #endif
 
 
@@ -71,6 +75,9 @@ namespace StarterAssets
 		}
 		public void InteractInput(bool newInteractState) {
 			interact = newInteractState;
+		}
+		public void ShankInput(bool newShankState) {
+			shank = newShankState;
 		}
 		private void OnApplicationFocus(bool hasFocus)
 		{

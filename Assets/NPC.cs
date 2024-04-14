@@ -10,7 +10,8 @@ public class NPC : MonoBehaviour
     private Target target;
     private NavMeshAgent _agent;
     private CapsuleCollider _coll;
-    [SerializeField] private GameObject drop;
+    [SerializeField] private ParticleSystem deathVFX;
+    [SerializeField] private GameObject[] drop;
     [SerializeField] private Transform[] poi;
     private int currentPOI = 0;
 
@@ -51,15 +52,15 @@ public class NPC : MonoBehaviour
             if (_agent != null) {
                 _agent.isStopped = true;
             }
-        } else {
-            DropLoot();
-        }
-
-
+        } 
     }
 
     public void DropLoot() {
-        Instantiate(drop, transform.position, Quaternion.identity);
+        if (target.isAlive) return;
+        for (int i = 0; i < drop.Length; i++) {
+            Instantiate(drop[i], transform.position, Quaternion.identity);
+        }
+        //Instantiate(deathVFX, transform.position, Quaternion.identity);
         gameObject.SetActive(false);
     }
 

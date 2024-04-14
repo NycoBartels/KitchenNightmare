@@ -77,6 +77,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  getGutted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4312443511290272672}
+        m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+        m_MethodName: DropLoot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4312443511290272672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,9 +104,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4709fcb226b9c7742b0a824cc05c4ff6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drop: {fileID: 5721936008579123794, guid: c68b6bdeadb4cda4bb4a6b33eda65ea8, type: 3}
+  deathVFX: {fileID: 5665871930419262348, guid: d962c936607930c43831ab60079421ac,
+    type: 3}
+  drop:
+  - {fileID: 2606332557336998265, guid: f1bd6acc5b435f44f8c8dfb19052c60d, type: 3}
+  - {fileID: 7171847289133774542, guid: 1c695b826053c044387458c2b4b5b32b, type: 3}
+  - {fileID: 4697974392289782960, guid: d28484024c07db146a12ca00cb3ee1bc, type: 3}
   poi:
-  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
 --- !u!114 &1525548481190480082

@@ -12,6 +12,7 @@ public class Interaction : MonoBehaviour {
     public Transform handRoot;
     [SerializeField] private float playerInteractDistance = 3f;
     private bool isActive = false;
+    [SerializeField] private ParticleSystem deathVFX;
 
     public Transform grabObj;
     private float previousDrag;
@@ -66,30 +67,19 @@ public class Interaction : MonoBehaviour {
             }
         }
         else print("didnt hit");
-        /*
-        Ray r = new Ray(interactRoot.position, interactRoot.forward);
-        if (Physics.Raycast(r, out RaycastHit hitInfo, playerInteractDistance)) {
+    }
 
-            // Check for Target script and invoke unity event. used to KILL rn
-            if (hitInfo.transform.TryGetComponent<Target>(out Target target)) {
-
-                target.interact.Invoke();
-                return;
+    public void Shank() {
+        RaycastHit hit;
+        if (Physics.Raycast(_cam.transform.position, _cam.transform.forward, out hit, playerInteractDistance, ~layermask)) {
+            if (hit.transform.root.TryGetComponent<Target>(out Target target)) {
+                if (target.isAlive) {
+                    target.interact.Invoke();
+                } else {
+                    target.getGutted.Invoke();
+                    Instantiate(deathVFX, hit.point, Quaternion.identity);
+                }
             }
-
-            // Pick up body
-            if (hitInfo.transform.GetComponent<Rigidbody>() != null) {
-                print("Hit smth");
-                holdingObj = hitInfo.transform.GetComponent<Rigidbody>();
-                previousMass = holdingObj.mass;
-                previousDrag = holdingObj.drag;
-                holdingObj.mass = holdingMassModifier;
-                holdingObj.drag = holdingMassModifier;
-            }
-            return;
         }
-        else print("Also didnt hit");
-
-        */
     }
 }

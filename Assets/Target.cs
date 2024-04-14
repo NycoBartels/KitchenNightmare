@@ -7,5 +7,5 @@ public class Target : MonoBehaviour
 {
     public bool isAlive = true;
     public UnityEvent interact;
-
+    public UnityEvent getGutted;
 }
