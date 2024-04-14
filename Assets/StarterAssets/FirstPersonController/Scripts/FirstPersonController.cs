@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
@@ -55,6 +56,7 @@ namespace StarterAssets
 		private float _cinemachineTargetPitch;
 
 		// player
+		public bool attacked;
 		public float _speed;
 		private float _rotationVelocity;
 		private float _verticalVelocity;
@@ -122,6 +124,7 @@ namespace StarterAssets
 				_interaction.StartInteraction();
 			}
 			if (_input.shank) {
+				attacked = true;
 				_input.shank = false;
 				_interaction.Shank();
 			}

@@ -10,6 +10,7 @@ public class NPC : MonoBehaviour
     private Target target;
     private NavMeshAgent _agent;
     private CapsuleCollider _coll;
+    private AudioSource _audio;
     [SerializeField] private ParticleSystem deathVFX;
     [SerializeField] private GameObject[] drop;
     [SerializeField] private Transform[] poi;
@@ -18,10 +19,15 @@ public class NPC : MonoBehaviour
     private float elapsedTime;
     private float updateTick = 1f;
 
+    [SerializeField] private AudioClip deathSFX;
+
+
+
     private void Start() {
         target = GetComponent<Target>();
         _agent = GetComponent<NavMeshAgent>();
         _coll = GetComponent<CapsuleCollider>();
+        _audio = GetComponent<AudioSource>();
         
         _agent?.SetDestination(poi[Random.Range(0,poi.Length)].position);
     }
@@ -49,6 +55,7 @@ public class NPC : MonoBehaviour
         if (target.isAlive) {
             _coll.enabled = false;
             target.isAlive = false;
+            _audio.PlayOneShot(deathSFX);
             if (_agent != null) {
                 _agent.isStopped = true;
             }
@@ -56,12 +63,13 @@ public class NPC : MonoBehaviour
     }
 
     public void DropLoot() {
-        if (target.isAlive) return;
-        for (int i = 0; i < drop.Length; i++) {
-            Instantiate(drop[i], transform.position, Quaternion.identity);
+        if (target.isAlive == false) {  
+            for (int i = 0; i < drop.Length; i++) {
+                Instantiate(drop[i], transform.position, Quaternion.identity);
+            }
+            gameObject.SetActive(false);
         }
-        //Instantiate(deathVFX, transform.position, Quaternion.identity);
-        gameObject.SetActive(false);
+
     }
 
 }

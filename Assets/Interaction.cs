@@ -15,6 +15,10 @@ public class Interaction : MonoBehaviour {
     [SerializeField] private float playerInteractDistance = 3f;
     private bool isActive = false;
     [SerializeField] private ParticleSystem deathVFX;
+    [SerializeField] private ParticleSystem hitVFX;
+
+    private AudioSource _audio;
+    private AudioClip knifeSFX;
 
     public Transform grabObj;
     private float previousDrag;
@@ -23,6 +27,7 @@ public class Interaction : MonoBehaviour {
 
     private void Awake() {
         _cam = GameObject.FindGameObjectWithTag("MainCamera");
+        _audio = GetComponent<AudioSource>();
     }
 
     private void Update() {
@@ -52,7 +57,6 @@ public class Interaction : MonoBehaviour {
         RaycastHit hit;
         if (Physics.Raycast(_cam.transform.position, _cam.transform.forward, out hit, playerInteractDistance, ~layermask)) {
             // Check for Target script and invoke unity event. used to KILL rn
-            print(hit.collider.gameObject);
             if (hit.transform.TryGetComponent<Target>(out Target target)) {
 
                 target.interact.Invoke();
@@ -73,17 +77,24 @@ public class Interaction : MonoBehaviour {
     }
 
     public void Shank() {
+        if (holdingObj != null) {
+            DropObject();
+        }
+        _audio.Play();
         RaycastHit hit;
         if (Physics.Raycast(_cam.transform.position, _cam.transform.forward, out hit, playerInteractDistance, ~layermask)) {
             if (hit.transform.root.TryGetComponent<Target>(out Target target)) {
+                Instantiate(hitVFX, hit.point, Quaternion.identity);
                 if (target.isAlive) {
-                    target.interact.Invoke();
+                    print("HIT ");
+                    target.getGutted.Invoke();
                 } else {
                     target.getGutted.Invoke();
                     Instantiate(deathVFX, hit.point, Quaternion.identity);
                 }
             } else {
                 if (hit.collider.gameObject.CompareTag("food")) {
+                    Instantiate(hitVFX, hit.point, Quaternion.identity);
                     hit.rigidbody.AddForce(_cam.transform.forward * hitForce);
                 }
             }

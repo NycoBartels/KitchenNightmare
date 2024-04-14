@@ -8,6 +8,8 @@ public class KnifeAnimation : MonoBehaviour
     private Animator _anim;
     public FirstPersonController player;
     private bool isRunning = false;
+    private bool isAttacking = false;
+
 
     private void Start() {
         _anim = GetComponent<Animator>();
@@ -15,22 +17,41 @@ public class KnifeAnimation : MonoBehaviour
     }
 
     private void Update() { // Only on change of state: change animation
+
+        if (player.attacked) {
+            _anim.Play("Knife_Attack", 0, 0);
+            player.attacked = false;
+            isAttacking = true;
+        }
+
+        /*
+        if (player.attacked) {
+            _anim.Play("Knife_Attack");
+            if (isAttacking == false) {
+                player.attacked = false;
+                isAttacking = true;
+                _anim.SetBool("attack", true);
+            }
+        }*/
+        if (isAttacking) return;
+
         var speed = player._speed;
         if (Mathf.Abs(speed) < .5f) {
             if (isRunning == true) {
-                print("TOO FAST");
                 isRunning = false;
-                _anim.SetBool("isRunning", false);
+                _anim.Play("Knife_Idle");
             }
         }
         if (Mathf.Abs(speed) > .5f) {
             if (isRunning == false) {
-                print("TOO SLOW");
                 isRunning = true;
-                _anim.SetBool("isRunning", true);
+                _anim.Play("Knife_Run");
             }
         }
     }
 
-
+    public void SetAttackFalse() {
+        _anim.Play("Knife_Idle");
+        isAttacking = false;
+    }
 }
