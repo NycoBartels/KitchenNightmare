@@ -23,7 +23,7 @@ public class AssemblyScript : MonoBehaviour
         random = UnityEngine.Random.Range(0, orders.Count);
         itsme = orders[random];
         //spawn item
-
+        Debug.Log("sup");
         Instantiate(itsme, spawnpoint.transform);
 
     }
