@@ -26,8 +26,8 @@ public class AssemblyScript : MonoBehaviour
         itsme = orders[random];
         //spawn item
         Debug.Log("sup");
-        Instantiate(itsme, spawnpoint.position, Quaternion.identity);
-
+        var newSpawn = Instantiate(itsme, spawnpoint.position, Quaternion.identity);
+        newSpawn.name = itsme.name;
     }
 }
 

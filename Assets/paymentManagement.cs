@@ -9,8 +9,8 @@ public class paymentManagement : MonoBehaviour
     [SerializeField] private GameObject dish;
     private int random;
     [SerializeField] Animator animator;
-    private GameObject goldenpipe;
-    [SerializeField] private GameObject spawnpoint;
+    [SerializeField] private GameObject goldenpipe;
+    [SerializeField] private GameObject reward;
 
 
     void OnTriggerEnter(Collider other)
@@ -46,11 +46,22 @@ public class paymentManagement : MonoBehaviour
             if (true)
             {
                 //goldenpipe go, spout money.
+                for (var i = 0; i < 50; i++)
+                {
+                    InvokeRepeating("Spawn", 0, i/5);
+
+                }
+                
             }
             //if they arent the right ones, error feedback!
             //EERRROORRR
             return;
         }
 
+    }
+
+    private void Spawn()
+    {
+        Instantiate(reward, goldenpipe.transform.position, Quaternion.identity);
     }
 }
