@@ -6,10 +6,12 @@ public class doordash : MonoBehaviour
 {
     [SerializeField] private Animator doornob;
     [SerializeField] private Animator door;
-    private bool enoughMoney = false;
+    private AudioSource _audio;
+    [SerializeField] private bool enoughMoney = false;
     // Start is called before the first frame update
 
     private void Start() {
+        _audio = GetComponent<AudioSource>();
         MoneyCounter.MoneyGoalAchieved += UnlockDoor;
     }
 
@@ -20,6 +22,7 @@ public class doordash : MonoBehaviour
     public void triggeranimation()
     {
         if (enoughMoney) {
+            _audio.Play();
             doornob.SetTrigger("nobfall");
             door.SetTrigger("doorfall");
         }
