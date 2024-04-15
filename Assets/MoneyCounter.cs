@@ -8,6 +8,7 @@ public class MoneyCounter : MonoBehaviour
 {
 
     public static event Action MoneyAdd;
+    public static event Action MoneyGoalAchieved;
     private TextMeshProUGUI label;
 
     [SerializeField] private int maxMoney;
@@ -31,11 +32,16 @@ public class MoneyCounter : MonoBehaviour
     public static void MoneyAdded() {
         MoneyAdd?.Invoke();
     }
-
+    public static void FinishMoneyGoal() {
+        MoneyGoalAchieved?.Invoke();
+    }
     private void GetOneMoney() {
         elapsedTime = 0f;
         currentMoney++;
         label.text = currentMoney.ToString() + " / " + maxMoney.ToString() + "g";
+        if (currentMoney > maxMoney) {
+            FinishMoneyGoal();
+        }
     }
 
     private void OnDestroy() {
