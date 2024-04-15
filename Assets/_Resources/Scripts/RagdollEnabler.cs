@@ -13,10 +13,14 @@ public class RagdollEnabler : MonoBehaviour {
     private CharacterJoint[] Joints;
     private Collider[] Colliders;
 
+    [Header("Set Start Animation")]
+    [SerializeField] private string animationName;
+
     private void Awake() {
         Rigidbodies = RagdollRoot.GetComponentsInChildren<Rigidbody>();
         Joints = RagdollRoot.GetComponentsInChildren<CharacterJoint>();
         Colliders = RagdollRoot.GetComponentsInChildren<Collider>();
+        Animator = GetComponentInChildren<Animator>();
 
         if (StartRagdoll) {
             EnableRagdoll();
@@ -24,6 +28,7 @@ public class RagdollEnabler : MonoBehaviour {
         else {
             EnableAnimator();
         }
+        Animator.Play(animationName);
     }
     public void EnableRagdoll() {
         pelvisToEnable.SetActive(true);

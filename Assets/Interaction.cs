@@ -17,6 +17,9 @@ public class Interaction : MonoBehaviour {
     [SerializeField] private ParticleSystem deathVFX;
     [SerializeField] private ParticleSystem hitVFX;
 
+    [SerializeField] private GameObject AudioObj;
+    [SerializeField] private AudioClip[] pickupSFX;
+    [SerializeField] private AudioClip[] yeetSFX;
     private AudioSource _audio;
     private AudioClip knifeSFX;
 
@@ -45,8 +48,13 @@ public class Interaction : MonoBehaviour {
     }
     private void DragObject() {
         holdingObj.transform.position = handRoot.position;
+        holdingObj.transform.LookAt(_cam.transform.forward, Vector3.up);
     }
     private void DropObject() {
+
+        var newAudio = Instantiate(AudioObj, transform.position, Quaternion.identity);
+        newAudio.GetComponent<AudioObject>().PlayRandomAudio(yeetSFX);
+
         holdingObj.mass = previousMass;
         holdingObj.drag = previousDrag;
         holdingObj.AddForce(_cam.transform.forward * pushForce);
@@ -65,7 +73,10 @@ public class Interaction : MonoBehaviour {
 
             // Pick up body
             if (hit.transform.GetComponent<Rigidbody>() != null && hit.collider.gameObject.isStatic == false) {
-                print("Hit smth");
+
+                var newAudio = Instantiate(AudioObj, transform.position, Quaternion.identity);
+                newAudio.GetComponent<AudioObject>().PlayRandomAudio(pickupSFX);
+
                 holdingObj = hit.transform.GetComponent<Rigidbody>();
                 previousMass = holdingObj.mass;
                 previousDrag = holdingObj.drag;
@@ -96,6 +107,8 @@ public class Interaction : MonoBehaviour {
                 if (hit.collider.gameObject.CompareTag("food")) {
                     Instantiate(hitVFX, hit.point, Quaternion.identity);
                     hit.rigidbody.AddForce(_cam.transform.forward * hitForce);
+                    var newAudio = Instantiate(AudioObj, transform.position, Quaternion.identity);
+                    newAudio.GetComponent<AudioObject>().PlayRandomAudio(yeetSFX);
                 }
             }
         }

@@ -9,6 +9,8 @@ public class crafting : MonoBehaviour
     public GameObject checkbox;
     private string datacollection;
     private GameObject Spawny;
+    private AudioSource _audio;
+    [SerializeField] private ParticleSystem cookingVFX;
     [SerializeField]private Transform spawnpoint;
     private List<GameObject> documentation = new List<GameObject>();
 
@@ -24,6 +26,7 @@ public class crafting : MonoBehaviour
 
     private void Start()
     {
+        _audio = GetComponent<AudioSource>();
         //check every second.
         //InvokeRepeating("Triggered", 0, 1f);
     }
@@ -110,27 +113,27 @@ public class crafting : MonoBehaviour
             // MEAT ASSORTMENT
             case "ribsdrumstickbone":
                 Spawny = meatsassortment;
-                SpawnAndDelete("meatsassortment");
+                SpawnAndDelete("assortmentofmeats");
                 break;
             case "drumstickribsbone":
                 Spawny = meatsassortment;
-                SpawnAndDelete("meatsassortment");
+                SpawnAndDelete("assortmentofmeats");
                 break;
             case "bonedrumstickribs":
                 Spawny = meatsassortment;
-                SpawnAndDelete("meatsassortment");
+                SpawnAndDelete("assortmentofmeats");
                 break;
             case "drumstickboneribs":
                 Spawny = meatsassortment;
-                SpawnAndDelete("meatsassortment");
+                SpawnAndDelete("assortmentofmeats");
                 break;
             case "boneribsdrumstick":
                 Spawny = meatsassortment;
-                SpawnAndDelete("meatsassortment");
+                SpawnAndDelete("assortmentofmeats");
                 break;
             case "ribsbonedrumstick":
                 Spawny = meatsassortment;
-                SpawnAndDelete("meatsassortment");
+                SpawnAndDelete("assortmentofmeats");
                 break;
 
             // DRUM STICK SOUP
@@ -153,11 +156,7 @@ public class crafting : MonoBehaviour
     private void SpawnAndDelete(string input)
     {
         //spawn item
-        var newSpawn = Instantiate(Spawny, spawnpoint.position, Quaternion.identity);
-        newSpawn.gameObject.name = input;
-        newSpawn.gameObject.tag = "food";
-        print(newSpawn + "Spawned!");
-        spawnstring = "";
+        StartCoroutine(SpawnDelayed(input));
         //destroy the other items
         for (int i = 0; i < documentation.Count; i++)
         {
@@ -165,5 +164,14 @@ public class crafting : MonoBehaviour
         }
         documentation.Clear();
 
+    }
+    private IEnumerator SpawnDelayed(string input) {
+        var goToSpawn = Spawny;
+        _audio.Play();
+        cookingVFX.Play();
+        yield return new WaitForSeconds(4.2f);
+        var newSpawn = Instantiate(goToSpawn, spawnpoint.position, Quaternion.identity);
+        newSpawn.gameObject.name = input;
+        newSpawn.gameObject.tag = "food";
     }
 }

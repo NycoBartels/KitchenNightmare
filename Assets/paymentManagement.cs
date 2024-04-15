@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -9,9 +10,17 @@ public class paymentManagement : MonoBehaviour
     [SerializeField] private GameObject order;
     [SerializeField] private GameObject dish;
     private int random;
+    [SerializeField] private TextMeshPro label;
     [SerializeField] Animator animator;
     [SerializeField] private GameObject goldenpipe;
     [SerializeField] private GameObject reward;
+    [SerializeField] private float coinForce = 1000;
+
+    private float elapsedTime;
+
+    private void Start() {
+        label.text = "place new order";
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -23,6 +32,7 @@ public class paymentManagement : MonoBehaviour
         if (other.gameObject.tag == "order")
         {
             order = other.gameObject;
+            label.text = "order:\n" + order.GetComponent<MeshRenderer>().material.name.Replace("(Instance)",""); ;
         }
         
 
@@ -32,6 +42,15 @@ public class paymentManagement : MonoBehaviour
 
     }
 
+    // DEBUG for spawning lotsa money
+    /*
+    private void Update() {
+        elapsedTime += Time.deltaTime;
+        if (elapsedTime >= .3f) {
+            Spawn();
+        }
+    }
+    */
     void OnTriggerExit(Collider other)
     {
         //check if dish or order is removed
@@ -56,6 +75,7 @@ public class paymentManagement : MonoBehaviour
             Destroy(order.gameObject);
             dish = null;
             order = null;
+            label.text = "place new order";
             //goldenpipe go, spout money.
 
             StartCoroutine(SpawnMoney());
@@ -78,6 +98,8 @@ public class paymentManagement : MonoBehaviour
 
     private void Spawn()
     {
-        Instantiate(reward, goldenpipe.transform.position, Quaternion.identity);
+        var newCoin = Instantiate(reward, goldenpipe.transform.position + Vector3.up, Quaternion.identity);
+        newCoin.GetComponent<Rigidbody>().AddForce(coinForce * Vector3.down + Vector3.forward * UnityEngine.Random.Range(-10, 10) / 10f + Vector3.right * UnityEngine.Random.Range(-10, 10) / 10f);
+        MoneyCounter.MoneyAdded();
     }
 }

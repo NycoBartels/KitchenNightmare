@@ -123,7 +123,21 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  deathSFX: {fileID: 0}
+  audioObj: {fileID: 2270242949781142439, guid: 7bb48df54ef59da4e96582f01cfc3a55,
+    type: 3}
+  deathSFX: {fileID: 8300000, guid: 09ff9715348599443aadba1aa4dd1ba7, type: 3}
+  oof:
+  - {fileID: 8300000, guid: 22b4d8c50a0f3fb498afccf214f04979, type: 3}
+  - {fileID: 8300000, guid: 9f7722a4d39a6ba49b9ba7000e154c15, type: 3}
+  - {fileID: 8300000, guid: c715a26d2fee2334ab2af66ba28c3baf, type: 3}
+  - {fileID: 8300000, guid: d2de5be08c32259409b576c42d1dbd4f, type: 3}
+  - {fileID: 8300000, guid: ffd614ba7a85c014bb044773e2392ba1, type: 3}
+  - {fileID: 8300000, guid: 749c82c129d5e7141b8c64cf49ca9499, type: 3}
+  - {fileID: 8300000, guid: 912069b7ced09464ba656a60dd7eaae6, type: 3}
+  - {fileID: 8300000, guid: 0cac3ab76e9724c478dfa849b3988bdf, type: 3}
+  - {fileID: 8300000, guid: 03ee89cb8d2c26744a9baff6905cf2c9, type: 3}
+  - {fileID: 8300000, guid: 7a311a857d5a1654c9f34df6945b27ab, type: 3}
+  - {fileID: 8300000, guid: aa691cd1d6eec6a43bd5052e6297b757, type: 3}
 --- !u!114 &1525548481190480082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,6 +155,7 @@ MonoBehaviour:
   StartRagdoll: 0
   pelvisToEnable: {fileID: 848276462779025865}
   Rigidbodies: []
+  animationName: Female Tough Walk
 --- !u!136 &2875595332331949775
 CapsuleCollider:
   m_ObjectHideFlags: 0

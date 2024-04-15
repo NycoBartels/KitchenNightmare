@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Rendering.HighDefinition;
 
 public class NPC : MonoBehaviour
 {
@@ -12,6 +11,7 @@ public class NPC : MonoBehaviour
     private NavMeshAgent _agent;
     private CapsuleCollider _coll;
     private AudioSource _audio;
+    private Animator anim;
     [SerializeField] private ParticleSystem deathVFX;
     [SerializeField] private GameObject[] drop;
     [SerializeField] private Transform[] poi;
@@ -20,7 +20,10 @@ public class NPC : MonoBehaviour
     private float elapsedTime;
     private float updateTick = 1f;
 
+
+    [SerializeField] private GameObject audioObj;
     [SerializeField] private AudioClip deathSFX;
+    [SerializeField] private AudioClip[] oof;
 
 
 
@@ -29,8 +32,12 @@ public class NPC : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
         _coll = GetComponent<CapsuleCollider>();
         _audio = GetComponent<AudioSource>();
-        
-        _agent?.SetDestination(poi[Random.Range(0,poi.Length)].position);
+        anim = GetComponentInChildren<Animator>();
+
+        if (_agent != null) {
+            _agent?.SetDestination(poi[Random.Range(0,poi.Length)].position);
+            anim.Play("Female Tough Walk");
+        }
     }
 
 
@@ -54,6 +61,8 @@ public class NPC : MonoBehaviour
 
     public void Die() {
         if (target.isAlive) {
+            var newAudio = Instantiate(audioObj, transform.position, Quaternion.identity);
+            newAudio.GetComponent<AudioObject>().PlayRandomAudio(oof);
             _coll.enabled = false;
             target.isAlive = false;
             _audio.PlayOneShot(deathSFX);
@@ -69,6 +78,8 @@ public class NPC : MonoBehaviour
                 var newDrop = Instantiate(drop[i], transform.position, Quaternion.identity);
                 newDrop.name = drop[i].name;
             }
+            var newAudio = Instantiate(audioObj, transform.position, Quaternion.identity);
+            newAudio.GetComponent<AudioObject>().PlayAudio(deathSFX);
             gameObject.SetActive(false);
         }
 

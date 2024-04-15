@@ -23,9 +23,14 @@ public class Timer : MonoBehaviour
 
     private void UpdateText() {
 
+
         var minutes = Mathf.FloorToInt((totalTime - elapsedTime) / 60f) ;
         var seconds = Mathf.FloorToInt((totalTime - elapsedTime) % 60f);
         label.text = "Time remaining: " + minutes.ToString() + ":" + seconds.ToString();
+
+        if (minutes == 1) {
+            label.fontSize = 96;
+        }
     }
 
 
