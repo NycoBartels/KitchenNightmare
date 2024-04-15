@@ -11,7 +11,7 @@ public class AssemblyScript : MonoBehaviour
     private int random;
     private GameObject itsme;
     Animator animator;
-
+    [SerializeField] private AudioSource printing; 
 
 
     private void Start()
@@ -24,6 +24,7 @@ public class AssemblyScript : MonoBehaviour
         //generate a random number for spawny
         random = UnityEngine.Random.Range(0, orders.Count);
         itsme = orders[random];
+        printing.Play();
         //spawn item
         Debug.Log("sup");
         var newSpawn = Instantiate(itsme, spawnpoint.position, Quaternion.identity);
