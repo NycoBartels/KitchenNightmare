@@ -39,7 +39,7 @@ public class MoneyCounter : MonoBehaviour
         elapsedTime = 0f;
         currentMoney++;
         label.text = currentMoney.ToString() + " / " + maxMoney.ToString() + "g";
-        if (currentMoney > maxMoney) {
+        if (currentMoney >= maxMoney) {
             FinishMoneyGoal();
         }
     }
