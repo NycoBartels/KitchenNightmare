@@ -14,7 +14,7 @@ public class NPC : MonoBehaviour
     private Animator anim;
     [SerializeField] private ParticleSystem deathVFX;
     [SerializeField] private GameObject[] drop;
-    [SerializeField] private Transform[] poi;
+    [SerializeField] public Transform[] poi;
     private int currentPOI = 0;
 
     private float elapsedTime;
@@ -80,6 +80,7 @@ public class NPC : MonoBehaviour
             }
             var newAudio = Instantiate(audioObj, transform.position, Quaternion.identity);
             newAudio.GetComponent<AudioObject>().PlayAudio(deathSFX);
+            SkellyRespawner.ReportSkellyDied();
             gameObject.SetActive(false);
         }
 
