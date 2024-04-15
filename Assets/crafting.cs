@@ -52,7 +52,11 @@ public class crafting : MonoBehaviour
     {
         if (other.gameObject.tag == "food")
         {
-            documentation.Remove(other.gameObject); 
+            documentation.Remove(other.gameObject);
+            if (documentation.Count > 1)
+            {
+                Triggered(); //RING THE ALLARM!
+            }
         }
     }
 
