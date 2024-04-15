@@ -56,6 +56,7 @@ namespace StarterAssets
 		private float _cinemachineTargetPitch;
 
 		// player
+		public bool isFree = false;
 		public bool attacked;
 		public float _speed;
 		private float _rotationVelocity;
@@ -116,6 +117,7 @@ namespace StarterAssets
 
 		private void Update()
 		{
+			if (!isFree) return;
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
@@ -132,6 +134,7 @@ namespace StarterAssets
 
 		private void LateUpdate()
 		{
+			if (!isFree) return;
 			CameraRotation();
 		}
 
